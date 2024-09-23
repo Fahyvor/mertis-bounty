@@ -1,0 +1,509 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_chainid",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC20ChainID",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "ERC20DepositInitiated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "ERC20WithdrawalFinalized",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_l2Gas",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "depositERC20",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_chainid",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_l2Gas",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "depositERC20ByChainId",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_l2Gas",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "depositERC20To",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_chainid",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_l2Gas",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "depositERC20ToByChainId",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "finalizeERC20Withdrawal",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_chainid",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "finalizeERC20WithdrawalByChainId",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_chainid",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "finalizeMetisWithdrawalByChainId",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "l2TokenBridge",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"depositERC20(address,address,uint256,uint32,bytes)": {
+					"details": "deposit an amount of the ERC20 to the caller's balance on L2.",
+					"params": {
+						"_amount": "Amount of the ERC20 to deposit",
+						"_data": "Optional data to forward to L2. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+						"_l1Token": "Address of the L1 ERC20 we are depositing",
+						"_l2Gas": "Gas limit required to complete the deposit on L2.",
+						"_l2Token": "Address of the L1 respective L2 ERC20"
+					}
+				},
+				"depositERC20ByChainId(uint256,address,address,uint256,uint32,bytes)": {
+					"details": "deposit an amount of the ERC20 to the caller's balance on L2.",
+					"params": {
+						"_amount": "Amount of the ERC20 to deposit",
+						"_chainid": "chainid",
+						"_data": "Optional data to forward to L2. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+						"_l1Token": "Address of the L1 ERC20 we are depositing",
+						"_l2Gas": "Gas limit required to complete the deposit on L2.",
+						"_l2Token": "Address of the L1 respective L2 ERC20"
+					}
+				},
+				"depositERC20To(address,address,address,uint256,uint32,bytes)": {
+					"details": "deposit an amount of ERC20 to a recipient's balance on L2.",
+					"params": {
+						"_amount": "Amount of the ERC20 to deposit.",
+						"_data": "Optional data to forward to L2. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+						"_l1Token": "Address of the L1 ERC20 we are depositing",
+						"_l2Gas": "Gas limit required to complete the deposit on L2.",
+						"_l2Token": "Address of the L1 respective L2 ERC20",
+						"_to": "L2 address to credit the withdrawal to."
+					}
+				},
+				"depositERC20ToByChainId(uint256,address,address,address,uint256,uint32,bytes)": {
+					"details": "deposit an amount of ERC20 to a recipient's balance on L2.",
+					"params": {
+						"_amount": "Amount of the ERC20 to deposit.",
+						"_chainid": "chainid",
+						"_data": "Optional data to forward to L2. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+						"_l1Token": "Address of the L1 ERC20 we are depositing",
+						"_l2Gas": "Gas limit required to complete the deposit on L2.",
+						"_l2Token": "Address of the L1 respective L2 ERC20",
+						"_to": "L2 address to credit the withdrawal to."
+					}
+				},
+				"finalizeERC20Withdrawal(address,address,address,address,uint256,bytes)": {
+					"details": "Complete a withdrawal from L2 to L1, and credit funds to the recipient's balance of the L1 ERC20 token. This call will fail if the initialized withdrawal from L2 has not been finalized.",
+					"params": {
+						"_amount": "Amount of the ERC20 to deposit.",
+						"_data": "Data provided by the sender on L2. This data is provided   solely as a convenience for external contracts. Aside from enforcing a maximum   length, these contracts provide no guarantees about its content.",
+						"_from": "L2 address initiating the transfer.",
+						"_l1Token": "Address of L1 token to finalizeWithdrawal for.",
+						"_l2Token": "Address of L2 token where withdrawal was initiated.",
+						"_to": "L1 address to credit the withdrawal to."
+					}
+				},
+				"finalizeERC20WithdrawalByChainId(uint256,address,address,address,address,uint256,bytes)": {
+					"details": "Complete a withdrawal from L2 to L1, and credit funds to the recipient's balance of the L1 ERC20 token. This call will fail if the initialized withdrawal from L2 has not been finalized.",
+					"params": {
+						"_amount": "Amount of the ERC20 to deposit.",
+						"_chainid": "chainid",
+						"_data": "Data provided by the sender on L2. This data is provided   solely as a convenience for external contracts. Aside from enforcing a maximum   length, these contracts provide no guarantees about its content.",
+						"_from": "L2 address initiating the transfer.",
+						"_l1Token": "Address of L1 token to finalizeWithdrawal for.",
+						"_l2Token": "Address of L2 token where withdrawal was initiated.",
+						"_to": "L1 address to credit the withdrawal to."
+					}
+				},
+				"finalizeMetisWithdrawalByChainId(uint256,address,address,uint256,bytes)": {
+					"details": "Complete a withdrawal from L2 to L1, and credit funds to the recipient's balance of the L1 ERC20 token. This call will fail if the initialized withdrawal from L2 has not been finalized.",
+					"params": {
+						"_amount": "Amount of the ERC20 to deposit.",
+						"_chainid": "chainid",
+						"_data": "Data provided by the sender on L2. This data is provided   solely as a convenience for external contracts. Aside from enforcing a maximum   length, these contracts provide no guarantees about its content.",
+						"_from": "L2 address initiating the transfer.",
+						"_to": "L1 address to credit the withdrawal to."
+					}
+				},
+				"l2TokenBridge()": {
+					"details": "get the address of the corresponding L2 bridge contract.",
+					"returns": {
+						"_0": "Address of the corresponding L2 bridge contract."
+					}
+				}
+			},
+			"title": "IL1ERC20Bridge",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/IL1ERC20Bridge.sol": "IL1ERC20Bridge"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/IL1ERC20Bridge.sol": {
+			"keccak256": "0x2ae07ccba2b6031511c22fbbc0c2a1b26d93a510226ad72edf693cf00be2c81a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5d954ce0724b20ee26705f30183549757b38a9dcc69853a6d0821ae8b1cb215e",
+				"dweb:/ipfs/QmXhv5QfibifCkYdV3dikQ6AWQxQspmSAq1Yimy1qxpy7J"
+			]
+		}
+	},
+	"version": 1
+}

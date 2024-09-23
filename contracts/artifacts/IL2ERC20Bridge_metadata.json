@@ -1,0 +1,323 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "DepositFailed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "DepositFinalized",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "WithdrawalInitiated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_l1Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "finalizeDeposit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "l1TokenBridge",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_l1Gas",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_l2Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_l1Gas",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "withdrawTo",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"finalizeDeposit(address,address,address,address,uint256,bytes)": {
+					"details": "Complete a deposit from L1 to L2, and credits funds to the recipient's balance of this L2 token. This call will fail if it did not originate from a corresponding deposit in L1StandardTokenBridge.",
+					"params": {
+						"_amount": "Amount of the token to withdraw",
+						"_data": "Data provider by the sender on L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+						"_from": "Account to pull the deposit from on L2.",
+						"_l1Token": "Address for the l1 token this is called with",
+						"_l2Token": "Address for the l2 token this is called with",
+						"_to": "Address to receive the withdrawal at"
+					}
+				},
+				"l1TokenBridge()": {
+					"details": "get the address of the corresponding L1 bridge contract.",
+					"returns": {
+						"_0": "Address of the corresponding L1 bridge contract."
+					}
+				},
+				"withdraw(address,uint256,uint32,bytes)": {
+					"details": "initiate a withdraw of some tokens to the caller's account on L1",
+					"params": {
+						"_amount": "Amount of the token to withdraw. param _l1Gas Unused, but included for potential forward compatibility considerations.",
+						"_data": "Optional data to forward to L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+						"_l2Token": "Address of L2 token where withdrawal was initiated."
+					}
+				},
+				"withdrawTo(address,address,uint256,uint32,bytes)": {
+					"details": "initiate a withdraw of some token to a recipient's account on L1.",
+					"params": {
+						"_amount": "Amount of the token to withdraw. param _l1Gas Unused, but included for potential forward compatibility considerations.",
+						"_data": "Optional data to forward to L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+						"_l2Token": "Address of L2 token where withdrawal is initiated.",
+						"_to": "L1 adress to credit the withdrawal to."
+					}
+				}
+			},
+			"title": "IL2ERC20Bridge",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/IL2ERC20Bridge.sol": "IL2ERC20Bridge"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/IL2ERC20Bridge.sol": {
+			"keccak256": "0x60a0cfa18c2e14abbf8214e5c53bcdb3ae4a5184ac93a568ecf4a8fe25b192f2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://14fe3cc806b1d7c465c912173a1dfda6809734b4edc84df485173f61ce5c5994",
+				"dweb:/ipfs/Qmbuj4n7SX8LQLv8NBkVLwRV8jJLWcDkxNuRZjCnuZ6yKq"
+			]
+		}
+	},
+	"version": 1
+}

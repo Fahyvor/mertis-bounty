@@ -1,0 +1,1572 @@
+{
+	"id": "efe21e7546a8fc798a1d6f93a23a7d9d",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/IL2ERC20Bridge.sol": {
+				"content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.9;\n\n/**\n * @title IL2ERC20Bridge\n */\ninterface IL2ERC20Bridge {\n    /**********\n     * Events *\n     **********/\n\n    event WithdrawalInitiated(\n        address indexed _l1Token,\n        address indexed _l2Token,\n        address indexed _from,\n        address _to,\n        uint256 _amount,\n        bytes _data\n    );\n\n    event DepositFinalized(\n        address indexed _l1Token,\n        address indexed _l2Token,\n        address indexed _from,\n        address _to,\n        uint256 _amount,\n        bytes _data\n    );\n\n    event DepositFailed(\n        address indexed _l1Token,\n        address indexed _l2Token,\n        address indexed _from,\n        address _to,\n        uint256 _amount,\n        bytes _data\n    );\n\n    /********************\n     * Public Functions *\n     ********************/\n\n    /**\n     * @dev get the address of the corresponding L1 bridge contract.\n     * @return Address of the corresponding L1 bridge contract.\n     */\n    function l1TokenBridge() external returns (address);\n\n    /**\n     * @dev initiate a withdraw of some tokens to the caller's account on L1\n     * @param _l2Token Address of L2 token where withdrawal was initiated.\n     * @param _amount Amount of the token to withdraw.\n     * param _l1Gas Unused, but included for potential forward compatibility considerations.\n     * @param _data Optional data to forward to L1. This data is provided\n     *        solely as a convenience for external contracts. Aside from enforcing a maximum\n     *        length, these contracts provide no guarantees about its content.\n     */\n    function withdraw(\n        address _l2Token,\n        uint256 _amount,\n        uint32 _l1Gas,\n        bytes calldata _data\n    ) external payable;\n\n    /**\n     * @dev initiate a withdraw of some token to a recipient's account on L1.\n     * @param _l2Token Address of L2 token where withdrawal is initiated.\n     * @param _to L1 adress to credit the withdrawal to.\n     * @param _amount Amount of the token to withdraw.\n     * param _l1Gas Unused, but included for potential forward compatibility considerations.\n     * @param _data Optional data to forward to L1. This data is provided\n     *        solely as a convenience for external contracts. Aside from enforcing a maximum\n     *        length, these contracts provide no guarantees about its content.\n     */\n    function withdrawTo(\n        address _l2Token,\n        address _to,\n        uint256 _amount,\n        uint32 _l1Gas,\n        bytes calldata _data\n    ) external payable;\n\n    /*************************\n     * Cross-chain Functions *\n     *************************/\n\n    /**\n     * @dev Complete a deposit from L1 to L2, and credits funds to the recipient's balance of this\n     * L2 token. This call will fail if it did not originate from a corresponding deposit in\n     * L1StandardTokenBridge.\n     * @param _l1Token Address for the l1 token this is called with\n     * @param _l2Token Address for the l2 token this is called with\n     * @param _from Account to pull the deposit from on L2.\n     * @param _to Address to receive the withdrawal at\n     * @param _amount Amount of the token to withdraw\n     * @param _data Data provider by the sender on L1. This data is provided\n     *        solely as a convenience for external contracts. Aside from enforcing a maximum\n     *        length, these contracts provide no guarantees about its content.\n     */\n    function finalizeDeposit(\n        address _l1Token,\n        address _l2Token,\n        address _from,\n        address _to,\n        uint256 _amount,\n        bytes calldata _data\n    ) external;\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/IL2ERC20Bridge.sol": {
+				"IL2ERC20Bridge": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_l1Token",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_l2Token",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_from",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "address",
+									"name": "_to",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "_amount",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "bytes",
+									"name": "_data",
+									"type": "bytes"
+								}
+							],
+							"name": "DepositFailed",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_l1Token",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_l2Token",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_from",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "address",
+									"name": "_to",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "_amount",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "bytes",
+									"name": "_data",
+									"type": "bytes"
+								}
+							],
+							"name": "DepositFinalized",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_l1Token",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_l2Token",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_from",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "address",
+									"name": "_to",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "_amount",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "bytes",
+									"name": "_data",
+									"type": "bytes"
+								}
+							],
+							"name": "WithdrawalInitiated",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "_l1Token",
+									"type": "address"
+								},
+								{
+									"internalType": "address",
+									"name": "_l2Token",
+									"type": "address"
+								},
+								{
+									"internalType": "address",
+									"name": "_from",
+									"type": "address"
+								},
+								{
+									"internalType": "address",
+									"name": "_to",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_amount",
+									"type": "uint256"
+								},
+								{
+									"internalType": "bytes",
+									"name": "_data",
+									"type": "bytes"
+								}
+							],
+							"name": "finalizeDeposit",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "l1TokenBridge",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "_l2Token",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_amount",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint32",
+									"name": "_l1Gas",
+									"type": "uint32"
+								},
+								{
+									"internalType": "bytes",
+									"name": "_data",
+									"type": "bytes"
+								}
+							],
+							"name": "withdraw",
+							"outputs": [],
+							"stateMutability": "payable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "_l2Token",
+									"type": "address"
+								},
+								{
+									"internalType": "address",
+									"name": "_to",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_amount",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint32",
+									"name": "_l1Gas",
+									"type": "uint32"
+								},
+								{
+									"internalType": "bytes",
+									"name": "_data",
+									"type": "bytes"
+								}
+							],
+							"name": "withdrawTo",
+							"outputs": [],
+							"stateMutability": "payable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {
+							"finalizeDeposit(address,address,address,address,uint256,bytes)": {
+								"details": "Complete a deposit from L1 to L2, and credits funds to the recipient's balance of this L2 token. This call will fail if it did not originate from a corresponding deposit in L1StandardTokenBridge.",
+								"params": {
+									"_amount": "Amount of the token to withdraw",
+									"_data": "Data provider by the sender on L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+									"_from": "Account to pull the deposit from on L2.",
+									"_l1Token": "Address for the l1 token this is called with",
+									"_l2Token": "Address for the l2 token this is called with",
+									"_to": "Address to receive the withdrawal at"
+								}
+							},
+							"l1TokenBridge()": {
+								"details": "get the address of the corresponding L1 bridge contract.",
+								"returns": {
+									"_0": "Address of the corresponding L1 bridge contract."
+								}
+							},
+							"withdraw(address,uint256,uint32,bytes)": {
+								"details": "initiate a withdraw of some tokens to the caller's account on L1",
+								"params": {
+									"_amount": "Amount of the token to withdraw. param _l1Gas Unused, but included for potential forward compatibility considerations.",
+									"_data": "Optional data to forward to L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+									"_l2Token": "Address of L2 token where withdrawal was initiated."
+								}
+							},
+							"withdrawTo(address,address,uint256,uint32,bytes)": {
+								"details": "initiate a withdraw of some token to a recipient's account on L1.",
+								"params": {
+									"_amount": "Amount of the token to withdraw. param _l1Gas Unused, but included for potential forward compatibility considerations.",
+									"_data": "Optional data to forward to L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.",
+									"_l2Token": "Address of L2 token where withdrawal is initiated.",
+									"_to": "L1 adress to credit the withdrawal to."
+								}
+							}
+						},
+						"title": "IL2ERC20Bridge",
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"finalizeDeposit(address,address,address,address,uint256,bytes)": "662a633a",
+							"l1TokenBridge()": "36c717c1",
+							"withdraw(address,uint256,uint32,bytes)": "32b7006d",
+							"withdrawTo(address,address,uint256,uint32,bytes)": "a3a79548"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.26+commit.8a97fa7a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_l1Token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_l2Token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"DepositFailed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_l1Token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_l2Token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"DepositFinalized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_l1Token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_l2Token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"WithdrawalInitiated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_l1Token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_l2Token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"finalizeDeposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l1TokenBridge\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_l2Token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"_l1Gas\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_l2Token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"_l1Gas\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"withdrawTo\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"finalizeDeposit(address,address,address,address,uint256,bytes)\":{\"details\":\"Complete a deposit from L1 to L2, and credits funds to the recipient's balance of this L2 token. This call will fail if it did not originate from a corresponding deposit in L1StandardTokenBridge.\",\"params\":{\"_amount\":\"Amount of the token to withdraw\",\"_data\":\"Data provider by the sender on L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.\",\"_from\":\"Account to pull the deposit from on L2.\",\"_l1Token\":\"Address for the l1 token this is called with\",\"_l2Token\":\"Address for the l2 token this is called with\",\"_to\":\"Address to receive the withdrawal at\"}},\"l1TokenBridge()\":{\"details\":\"get the address of the corresponding L1 bridge contract.\",\"returns\":{\"_0\":\"Address of the corresponding L1 bridge contract.\"}},\"withdraw(address,uint256,uint32,bytes)\":{\"details\":\"initiate a withdraw of some tokens to the caller's account on L1\",\"params\":{\"_amount\":\"Amount of the token to withdraw. param _l1Gas Unused, but included for potential forward compatibility considerations.\",\"_data\":\"Optional data to forward to L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.\",\"_l2Token\":\"Address of L2 token where withdrawal was initiated.\"}},\"withdrawTo(address,address,uint256,uint32,bytes)\":{\"details\":\"initiate a withdraw of some token to a recipient's account on L1.\",\"params\":{\"_amount\":\"Amount of the token to withdraw. param _l1Gas Unused, but included for potential forward compatibility considerations.\",\"_data\":\"Optional data to forward to L1. This data is provided        solely as a convenience for external contracts. Aside from enforcing a maximum        length, these contracts provide no guarantees about its content.\",\"_l2Token\":\"Address of L2 token where withdrawal is initiated.\",\"_to\":\"L1 adress to credit the withdrawal to.\"}}},\"title\":\"IL2ERC20Bridge\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/IL2ERC20Bridge.sol\":\"IL2ERC20Bridge\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/IL2ERC20Bridge.sol\":{\"keccak256\":\"0x60a0cfa18c2e14abbf8214e5c53bcdb3ae4a5184ac93a568ecf4a8fe25b192f2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://14fe3cc806b1d7c465c912173a1dfda6809734b4edc84df485173f61ce5c5994\",\"dweb:/ipfs/Qmbuj4n7SX8LQLv8NBkVLwRV8jJLWcDkxNuRZjCnuZ6yKq\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/IL2ERC20Bridge.sol": {
+				"ast": {
+					"absolutePath": "contracts/IL2ERC20Bridge.sol",
+					"exportedSymbols": {
+						"IL2ERC20Bridge": [
+							93
+						]
+					},
+					"id": 94,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".9"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "32:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "IL2ERC20Bridge",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"documentation": {
+								"id": 2,
+								"nodeType": "StructuredDocumentation",
+								"src": "57:32:0",
+								"text": " @title IL2ERC20Bridge"
+							},
+							"fullyImplemented": false,
+							"id": 93,
+							"linearizedBaseContracts": [
+								93
+							],
+							"name": "IL2ERC20Bridge",
+							"nameLocation": "100:14:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"anonymous": false,
+									"eventSelector": "73d170910aba9e6d50b102db522b1dbcd796216f5128b445aa2135272886497e",
+									"id": 16,
+									"name": "WithdrawalInitiated",
+									"nameLocation": "177:19:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 15,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 4,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_l1Token",
+												"nameLocation": "222:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "206:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 3,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "206:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 6,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_l2Token",
+												"nameLocation": "256:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "240:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 5,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "240:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 8,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_from",
+												"nameLocation": "290:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "274:21:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 7,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "274:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 10,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_to",
+												"nameLocation": "313:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "305:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 9,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "305:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 12,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_amount",
+												"nameLocation": "334:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "326:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 11,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "326:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 14,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_data",
+												"nameLocation": "357:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "351:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes_memory_ptr",
+													"typeString": "bytes"
+												},
+												"typeName": {
+													"id": 13,
+													"name": "bytes",
+													"nodeType": "ElementaryTypeName",
+													"src": "351:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes_storage_ptr",
+														"typeString": "bytes"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "196:172:0"
+									},
+									"src": "171:198:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "b0444523268717a02698be47d0803aa7468c00acbed2f8bd93a0459cde61dd89",
+									"id": 30,
+									"name": "DepositFinalized",
+									"nameLocation": "381:16:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 29,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 18,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_l1Token",
+												"nameLocation": "423:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 30,
+												"src": "407:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 17,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "407:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 20,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_l2Token",
+												"nameLocation": "457:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 30,
+												"src": "441:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 19,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "441:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 22,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_from",
+												"nameLocation": "491:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 30,
+												"src": "475:21:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 21,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "475:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 24,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_to",
+												"nameLocation": "514:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 30,
+												"src": "506:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 23,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "506:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 26,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_amount",
+												"nameLocation": "535:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 30,
+												"src": "527:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 25,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "527:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 28,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_data",
+												"nameLocation": "558:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 30,
+												"src": "552:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes_memory_ptr",
+													"typeString": "bytes"
+												},
+												"typeName": {
+													"id": 27,
+													"name": "bytes",
+													"nodeType": "ElementaryTypeName",
+													"src": "552:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes_storage_ptr",
+														"typeString": "bytes"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "397:172:0"
+									},
+									"src": "375:195:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "7ea89a4591614515571c2b51f5ea06494056f261c10ab1ed8c03c7590d87bce0",
+									"id": 44,
+									"name": "DepositFailed",
+									"nameLocation": "582:13:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 43,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 32,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_l1Token",
+												"nameLocation": "621:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 44,
+												"src": "605:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 31,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "605:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 34,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_l2Token",
+												"nameLocation": "655:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 44,
+												"src": "639:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 33,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "639:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 36,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_from",
+												"nameLocation": "689:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 44,
+												"src": "673:21:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 35,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "673:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 38,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_to",
+												"nameLocation": "712:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 44,
+												"src": "704:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 37,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "704:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 40,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_amount",
+												"nameLocation": "733:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 44,
+												"src": "725:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 39,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "725:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 42,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_data",
+												"nameLocation": "756:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 44,
+												"src": "750:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes_memory_ptr",
+													"typeString": "bytes"
+												},
+												"typeName": {
+													"id": 41,
+													"name": "bytes",
+													"nodeType": "ElementaryTypeName",
+													"src": "750:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes_storage_ptr",
+														"typeString": "bytes"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "595:172:0"
+									},
+									"src": "576:192:0"
+								},
+								{
+									"documentation": {
+										"id": 45,
+										"nodeType": "StructuredDocumentation",
+										"src": "854:144:0",
+										"text": " @dev get the address of the corresponding L1 bridge contract.\n @return Address of the corresponding L1 bridge contract."
+									},
+									"functionSelector": "36c717c1",
+									"id": 50,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "l1TokenBridge",
+									"nameLocation": "1012:13:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 46,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1025:2:0"
+									},
+									"returnParameters": {
+										"id": 49,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 48,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 50,
+												"src": "1046:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 47,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "1046:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1045:9:0"
+									},
+									"scope": 93,
+									"src": "1003:52:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 51,
+										"nodeType": "StructuredDocumentation",
+										"src": "1061:557:0",
+										"text": " @dev initiate a withdraw of some tokens to the caller's account on L1\n @param _l2Token Address of L2 token where withdrawal was initiated.\n @param _amount Amount of the token to withdraw.\n param _l1Gas Unused, but included for potential forward compatibility considerations.\n @param _data Optional data to forward to L1. This data is provided\n        solely as a convenience for external contracts. Aside from enforcing a maximum\n        length, these contracts provide no guarantees about its content."
+									},
+									"functionSelector": "32b7006d",
+									"id": 62,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "withdraw",
+									"nameLocation": "1632:8:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 60,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 53,
+												"mutability": "mutable",
+												"name": "_l2Token",
+												"nameLocation": "1658:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 62,
+												"src": "1650:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 52,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "1650:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 55,
+												"mutability": "mutable",
+												"name": "_amount",
+												"nameLocation": "1684:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 62,
+												"src": "1676:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 54,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1676:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 57,
+												"mutability": "mutable",
+												"name": "_l1Gas",
+												"nameLocation": "1708:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 62,
+												"src": "1701:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint32",
+													"typeString": "uint32"
+												},
+												"typeName": {
+													"id": 56,
+													"name": "uint32",
+													"nodeType": "ElementaryTypeName",
+													"src": "1701:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint32",
+														"typeString": "uint32"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 59,
+												"mutability": "mutable",
+												"name": "_data",
+												"nameLocation": "1739:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 62,
+												"src": "1724:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes_calldata_ptr",
+													"typeString": "bytes"
+												},
+												"typeName": {
+													"id": 58,
+													"name": "bytes",
+													"nodeType": "ElementaryTypeName",
+													"src": "1724:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes_storage_ptr",
+														"typeString": "bytes"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1640:110:0"
+									},
+									"returnParameters": {
+										"id": 61,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1767:0:0"
+									},
+									"scope": 93,
+									"src": "1623:145:0",
+									"stateMutability": "payable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 63,
+										"nodeType": "StructuredDocumentation",
+										"src": "1774:614:0",
+										"text": " @dev initiate a withdraw of some token to a recipient's account on L1.\n @param _l2Token Address of L2 token where withdrawal is initiated.\n @param _to L1 adress to credit the withdrawal to.\n @param _amount Amount of the token to withdraw.\n param _l1Gas Unused, but included for potential forward compatibility considerations.\n @param _data Optional data to forward to L1. This data is provided\n        solely as a convenience for external contracts. Aside from enforcing a maximum\n        length, these contracts provide no guarantees about its content."
+									},
+									"functionSelector": "a3a79548",
+									"id": 76,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "withdrawTo",
+									"nameLocation": "2402:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 74,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 65,
+												"mutability": "mutable",
+												"name": "_l2Token",
+												"nameLocation": "2430:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 76,
+												"src": "2422:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 64,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "2422:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 67,
+												"mutability": "mutable",
+												"name": "_to",
+												"nameLocation": "2456:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 76,
+												"src": "2448:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 66,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "2448:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 69,
+												"mutability": "mutable",
+												"name": "_amount",
+												"nameLocation": "2477:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 76,
+												"src": "2469:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 68,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2469:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 71,
+												"mutability": "mutable",
+												"name": "_l1Gas",
+												"nameLocation": "2501:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 76,
+												"src": "2494:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint32",
+													"typeString": "uint32"
+												},
+												"typeName": {
+													"id": 70,
+													"name": "uint32",
+													"nodeType": "ElementaryTypeName",
+													"src": "2494:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint32",
+														"typeString": "uint32"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 73,
+												"mutability": "mutable",
+												"name": "_data",
+												"nameLocation": "2532:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 76,
+												"src": "2517:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes_calldata_ptr",
+													"typeString": "bytes"
+												},
+												"typeName": {
+													"id": 72,
+													"name": "bytes",
+													"nodeType": "ElementaryTypeName",
+													"src": "2517:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes_storage_ptr",
+														"typeString": "bytes"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2412:131:0"
+									},
+									"returnParameters": {
+										"id": 75,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "2560:0:0"
+									},
+									"scope": 93,
+									"src": "2393:168:0",
+									"stateMutability": "payable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 77,
+										"nodeType": "StructuredDocumentation",
+										"src": "2662:787:0",
+										"text": " @dev Complete a deposit from L1 to L2, and credits funds to the recipient's balance of this\n L2 token. This call will fail if it did not originate from a corresponding deposit in\n L1StandardTokenBridge.\n @param _l1Token Address for the l1 token this is called with\n @param _l2Token Address for the l2 token this is called with\n @param _from Account to pull the deposit from on L2.\n @param _to Address to receive the withdrawal at\n @param _amount Amount of the token to withdraw\n @param _data Data provider by the sender on L1. This data is provided\n        solely as a convenience for external contracts. Aside from enforcing a maximum\n        length, these contracts provide no guarantees about its content."
+									},
+									"functionSelector": "662a633a",
+									"id": 92,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "finalizeDeposit",
+									"nameLocation": "3463:15:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 90,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 79,
+												"mutability": "mutable",
+												"name": "_l1Token",
+												"nameLocation": "3496:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 92,
+												"src": "3488:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 78,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "3488:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 81,
+												"mutability": "mutable",
+												"name": "_l2Token",
+												"nameLocation": "3522:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 92,
+												"src": "3514:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 80,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "3514:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 83,
+												"mutability": "mutable",
+												"name": "_from",
+												"nameLocation": "3548:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 92,
+												"src": "3540:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 82,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "3540:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 85,
+												"mutability": "mutable",
+												"name": "_to",
+												"nameLocation": "3571:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 92,
+												"src": "3563:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 84,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "3563:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 87,
+												"mutability": "mutable",
+												"name": "_amount",
+												"nameLocation": "3592:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 92,
+												"src": "3584:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 86,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3584:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 89,
+												"mutability": "mutable",
+												"name": "_data",
+												"nameLocation": "3624:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 92,
+												"src": "3609:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes_calldata_ptr",
+													"typeString": "bytes"
+												},
+												"typeName": {
+													"id": 88,
+													"name": "bytes",
+													"nodeType": "ElementaryTypeName",
+													"src": "3609:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes_storage_ptr",
+														"typeString": "bytes"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3478:157:0"
+									},
+									"returnParameters": {
+										"id": 91,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "3644:0:0"
+									},
+									"scope": 93,
+									"src": "3454:191:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 94,
+							"src": "90:3557:0",
+							"usedErrors": [],
+							"usedEvents": [
+								16,
+								30,
+								44
+							]
+						}
+					],
+					"src": "32:3615:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

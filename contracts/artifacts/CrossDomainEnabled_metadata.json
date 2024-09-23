@@ -1,0 +1,86 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_messenger",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "messenger",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Helper contract for contracts performing cross-domain communications Compiler used: defined by inheriting contract Runtime target: defined by inheriting contract",
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"params": {
+						"_messenger": "Address of the CrossDomainMessenger on the current layer."
+					}
+				}
+			},
+			"title": "CrossDomainEnabled",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/CrossDomainEnabled.sol": "CrossDomainEnabled"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/CrossDomainEnabled.sol": {
+			"keccak256": "0x06cffff313d7d109e4a40fd86cd14ab0f8df0d17babe53edf67ab6a240ccedd7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9a7b5b7f0e6c3661e9d0f50a1e7f8a20939523d942b6a38f1c21fecb5abee4a0",
+				"dweb:/ipfs/QmTfch55We7FzMs48auDcvNnWw9ADckvW5DdrEQz7XPmYx"
+			]
+		},
+		"contracts/ICrossDomainMessenger.sol": {
+			"keccak256": "0xb4015a24e25ac91b5f59ef2d7742427c5eae1925acb6ab7e858f4820973565b0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ce08af9482042fa87816c953354ae6c364391c24ec8c9dd9b9f592cf6bc686b4",
+				"dweb:/ipfs/QmPAqAr4ozPNkHwy4vKTe36wUCFDGDctdFuvheB3AwsCXa"
+			]
+		}
+	},
+	"version": 1
+}

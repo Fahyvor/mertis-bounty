@@ -1,0 +1,46 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"title": "Lib_PredeployAddresses",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Lib_PredeployAddresses.sol": "Lib_PredeployAddresses"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Lib_PredeployAddresses.sol": {
+			"keccak256": "0x34cc618d398a86cce46f4c2fecb015634c8f804bd1c34bd2c74cabd8cb8cc216",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5e93ecce7ad9f19d667117b542b8e092bca1f2cced279e373ec3e1226b024b69",
+				"dweb:/ipfs/QmZFoiYH3ZR8d86311HkC5d5i25mEmTt2f4MdwoUtFQqq4"
+			]
+		}
+	},
+	"version": 1
+}
